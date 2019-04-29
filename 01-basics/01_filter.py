@@ -48,10 +48,15 @@ def convolution_2d(img, kernel):
     # TODO write convolution of arbritrary sized convolution here
     # Hint: You need to handle the edges.
     # A simple solution would be to work with an offset (offset = int(kernel.shape[0]/2))
-
+    offset_x = int(kernel.shape[1] / 2)
+    offset_y = int(kernel.shape[0] / 2)
     newimg = np.zeros(img.shape)
 
-    # YOUR CODE HERE
+    for x in range(offset_x, img.shape[1] - offset_x):
+        for y in range(offset_y, img.shape[0] - offset_y):
+            area = img[y - offset_y:y + offset_y + 1, x - offset_x: x + offset_x + 1]
+            intensity = sum((area * kernel).ravel())
+            newimg.itemset(y, x, intensity)
 
     return newimg
 
@@ -59,18 +64,24 @@ def convolution_2d(img, kernel):
 if __name__ == "__main__":
 
     # 1. load image in grayscale
+    img = cv2.imread('images/Lenna.png', cv2.IMREAD_GRAYSCALE)
     # 2. convert image to 0-1 image (see im2double)
-
+    img_norm = im2double(img)
 
     # image kernels
     sobelmask_x = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
-    sobelmask_y # YOUR CODE HERE
+    sobelmask_y = np.array([[1, 2, 1], [0, 0, 0], [-1, -2, -1]])# YOUR CODE HERE
     gk = make_gaussian(11)
 
     # 3 .use image kernels on normalized image
     # You can compare your implementation with the opencv implementation (cv2.filter2D)
 
+    sobel_x = convolution_2d(img_norm, sobelmask_x)
+    sobel_y = convolution_2d(img_norm, sobelmask_y)
+    gaussian = convolution_2d(img_norm, make_gaussian(size=5))
+
     # 4. compute magnitude of gradients
+    mog = np.sqrt(sobel_x ** 2 + sobel_y ** 2)
 
     # Show resulting images
     cv2.imshow("sobel_x", sobel_x)
