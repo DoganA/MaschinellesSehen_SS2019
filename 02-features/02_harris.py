@@ -61,6 +61,8 @@ print("====================================")
 # while True:
 #     cv2.imshow('harris',harris_thres)
 #     cv2.imshow('harris_cv',harris_cv_thres)
+#     cv2.imshow('harris',harris_thres*1.)
+#     cv2.imshow('harris_cv',harris_cv_thres*1.)
 #     ch = cv2.waitKey(0)
 #     if ch == 27:
 #         break
