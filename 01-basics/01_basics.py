@@ -50,7 +50,7 @@ img = cv2.imread('images/Lenna.png')
 img_bw = bgr2grayscale_fast(img)
 display = np.concatenate((img_bw, img), axis=1)
 while True:
-    cv2.imshow('ISY Aufgabe 1', display)
+    cv2.imshow('MS Aufgabe 1', display)
     key = cv2.waitKey(0)
     if key == ord('q') or key == ord('Q'):
         break

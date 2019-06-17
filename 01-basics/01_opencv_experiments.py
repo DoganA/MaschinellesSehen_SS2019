@@ -68,12 +68,12 @@ while(True):
         high threshold. The low threshold is typically set to 1/2 of the high threshold in this case.
         """
         otsu_threshold, _ = cv2.threshold(frame, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-        frame = cv2.Canny(frame, otsu_threshold / 2, otsu_threshold
+        frame = cv2.Canny(frame, otsu_threshold / 2, otsu_threshold)
     # Display the resulting frame
-    cv2.imshow('frame', frame)
+    cv2.imshow('frame', frame);
 
 
 
 # When everything done, release the capture
-cap.release()
+cap.release();
 cv2.destroyAllWindows()
